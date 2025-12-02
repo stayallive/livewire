@@ -89,6 +89,9 @@ class FrontendAssets extends Mechanism
         return Utils::pretendResponseIsFile(__DIR__.'/../../../dist/livewire.min.js.map');
     }
 
+    /**
+     * @return string
+     */
     public static function styles($options = [])
     {
         if (app(static::class)->hasRenderedStyles) return '';
@@ -131,12 +134,19 @@ class FrontendAssets extends Mechanism
             [wire\:cloak] {
                 display: none !important;
             }
+
+            dialog#livewire-error::backdrop {
+                background-color: rgba(0, 0, 0, .6);
+            }
         </style>
         HTML;
 
         return static::minify($html);
     }
 
+    /**
+     * @return string
+     */
     public static function scripts($options = [])
     {
         if (app(static::class)->hasRenderedScripts) return '';
